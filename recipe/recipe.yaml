@@ -1,0 +1,77 @@
+schema_version: 1
+
+context:
+  version: "1.1.0"
+
+package:
+  name: arcjetcv
+  version: ${{ version }}
+
+source:
+  url: https://github.com/magnus-haw/arcjetCV/archive/refs/tags/v${{ version }}.tar.gz
+  sha256: feb62e8c3d228f15008925b5dbf59c9617408056b0059ceeff2bb88497d5f9b1
+
+build:
+  number: 1
+  skip: win
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ stdlib("c") }}
+    - if: build_platform != target_platform
+      then: 
+        - python
+        - cross-python_${{ target_platform }}
+        - numpy
+  host:
+    - pip
+    - setuptools
+    - python
+    - numpy
+    - qt-main
+    - if: linux
+      then:
+        - libgl-devel
+        - xorg-libxfixes
+  run:
+    - python
+    - ${{ pin_compatible('numpy') }}
+    - pytorch
+    - pyside6
+    - opencv
+    - matplotlib-base
+    - pandas
+    - pyarrow
+    - scikit-learn
+    - segmentation-models-pytorch
+    - torchvision
+    - if: linux
+      then:
+        - ocl-icd-system
+tests:
+  - python:
+      imports:
+        - arcjetCV
+  - requirements:
+      run:
+        - pip
+    script:
+      - pip check
+
+about:
+  summary: App to process arcjet videos and segment the edge of the shock and of the sample.
+  description: App to process arcjet videos and segment the edge of the shock and of the sample.
+  license: NASA-1.3
+  license_file: LICENSE
+  homepage: https://github.com/magnus-haw/arcjetCV/
+  repository: https://github.com/magnus-haw/arcjetCV/
+  documentation: https://arcjetcv.readthedocs.io/
+
+extra:
+  recipe-maintainers:
+    - alexandrequ
+    - magnus-haw
+    - fedesemeraro
+    - alexandrequ
