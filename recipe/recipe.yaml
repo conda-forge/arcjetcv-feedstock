@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://github.com/magnus-haw/arcjetCV/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: feb62e8c3d228f15008925b5dbf59c9617408056b0059ceeff2bb88497d5f9b1
+  sha256: d2c12af435a7f68dbaf4ec08b96f666eeff02ab4915bc7fb6d38947bc55303c8
 
 build:
   number: 1
