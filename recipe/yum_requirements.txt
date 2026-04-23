@@ -1,2 +1,3 @@
+mesa-libEGL
 mesa-libGL
-xorg-x11-server-Xorg
+mesa-dri-drivers
